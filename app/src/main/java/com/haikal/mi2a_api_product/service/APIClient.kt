@@ -16,12 +16,17 @@ object APIClient {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
-}
 
-// Add interceptor
-fun interceptor(): OkHttpClient {
-    val interceptor = HttpLoggingInterceptor()
-    interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
 
-    return OkHttpClient.Builder().addInterceptor(interceptor).build()
+    // Add interceptor
+    fun interceptor(): OkHttpClient {
+        val interceptor = HttpLoggingInterceptor()
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
+
+        return OkHttpClient.Builder().addInterceptor(interceptor).build()
+    }
+
+    val produkService: ProdukService by lazy {
+        retrofit.create(ProdukService::class.java)
+    }
 }
